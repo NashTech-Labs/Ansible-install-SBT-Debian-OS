@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Vaibhav Kumar
+  description: DevOps Engineer
+  company: Knoldus Inc
+  issue_tracker_url: http://example.com/issue/tracker
+  min_ansible_version: 2.1
+  platforms:
+  - name: Debian
+      versions:
+        - buster
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+        - jammy

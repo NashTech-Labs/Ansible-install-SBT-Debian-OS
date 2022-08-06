@@ -1,0 +1,11 @@
+---
+extends: vars
+
+rules:
+  line-length:
+    max: 200
+    level: warning
+
+ignore: |
+  
+  .travis.yml

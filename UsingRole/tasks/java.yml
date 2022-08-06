@@ -1,0 +1,4 @@
+- name: install java
+  apt: 
+    name: openjdk-{{ java_version }}-jdk
+    update-cache: yes

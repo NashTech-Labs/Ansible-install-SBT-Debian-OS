@@ -1,0 +1,41 @@
+# another method to download and install sbt
+# - name: Download SBT package
+#   get_url: 
+#     url: https://github.com/sbt/sbt/releases/download/v{{ sbt_version }}/sbt-{{ sbt_version }}.tgz
+#     dest: /usr/local/src/sbt-{{ sbt_version }}.tgz
+
+# - name: Extract and install SBT
+#   unarchive:
+#     src: /usr/local/src/sbt-{{ sbt_version }}.tgz
+#     dest: /opt
+#     copy: no  
+
+# Add specified repository into sources list using specified filename.
+- apt_repository:
+    repo: deb https://repo.scala-sbt.org/scalasbt/debian all main
+    state: present
+    filename: 'sbt.list'
+  become: true
+
+- apt_repository:
+    repo: deb https://repo.scala-sbt.org/scalasbt/debian /
+    state: present
+    filename: 'sbt_old.list'
+  become: true
+
+- name: Add APT key for SBT
+  apt_key:
+    keyserver: "{{ sbt_apt_keyserver }}"
+    id: "{{ sbt_apt_key_id }}"
+    state: present
+  become: true
+
+- name: Update Apt package
+  become: true
+  apt:
+    update_cache: yes
+
+- name: Install sbt
+  apt:
+    name: sbt={{ sbt_version }}
+    update_cache: true

@@ -1,0 +1,51 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  vars:
+  - scala_version: 2.11.2 
+  - java_version: 11
+  - sbt_version: 1.6.2
+  tasks:
+
+  # Java
+  - name: install java
+    apt: 
+      name: openjdk-{{ java_version }}-jdk
+      update-cache: yes
+
+  # Scala
+  - name: Download Scala
+    get_url: 
+      url: http://www.scala-lang.org/files/archive/scala-{{ scala_version }}.tgz
+      dest: /usr/local/src/scala-{{ scala_version }}.tgz
+
+  - name: Extract and install Scala
+    unarchive: 
+      src: /usr/local/src/scala-{{ scala_version }}.tgz
+      dest: /opt
+      copy: no
+
+  - name: Symlink Scala into /usr/local/bin
+    file: 
+      src: /opt/scala-{{ scala_version }}/bin/{{ item }}
+      dest: /usr/local/bin/{{ item }}
+      state: link
+    with_items:
+      - fsc
+      - scala
+      - scalac
+      - scaladoc
+      - scalap
+
+  # SBT
+  - name: Download SBT package
+    get_url: 
+      url: https://github.com/sbt/sbt/releases/download/v{{ sbt_version }}/sbt-{{ sbt_version }}.tgz
+      dest: /usr/local/src/sbt-{{ sbt_version }}.tgz
+  
+  - name: Extract and install SBT
+    unarchive:
+      src: /usr/local/src/sbt-{{ sbt_version }}.tgz
+      dest: /opt
+      copy: no  
