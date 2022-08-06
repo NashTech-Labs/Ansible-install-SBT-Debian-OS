@@ -25,8 +25,12 @@ Requirements
 Role Variables
 --------------
 
-Variables used in this are just the version:
-
+Variables used:
+  * scala_version: 2.11.2 
+  * java_version: 11
+  * sbt_version: 1.6.2
+  * sbt_apt_key_keyserver: keyserver.ubuntu.com
+  * sbt_apt_key_id: 0x2EE0EA64E40A89B84B2DF73499E82A75642AC823
 
 Dependencies
 ------------

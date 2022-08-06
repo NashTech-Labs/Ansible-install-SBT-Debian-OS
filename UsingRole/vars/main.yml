@@ -1,5 +1,4 @@
 ---
----
 ## Which Scala, Java, SBT version to use:
 scala_version: 2.11.2 
 java_version: 11
